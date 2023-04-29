@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Ticketing System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="ticketing.js"></script>
+  </head>
+  <body ng-app="ticketingSystem" ng-controller="TicketController">
+    <h1>Ticketing System</h1>
+    <form ng-submit="submit()">
+      <label for="carMake">Car Make:</label>
+      <input type="text" id="carMake" ng-model="formData.carMake" required><br>
+      <label for="carModel">Car Model:</label>
+      <input type="text" id="carModel" ng-model="formData.carModel" required><br>
+      <label for="carColor">Car Color:</label>
+      <input type="text" id="carColor" ng-model="formData.carColor" required><br>
+      <button type="submit">Park Car</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Car Make</th>
+          <th>Car Model</th>
+          <th>Car Color</th>
+          <th>Parked At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="ticket in tickets">
+          <td>{{ ticket.id }}</td>
+          <td>{{ ticket.car.carMake }}</td>
+          <td>{{ ticket.car.carModel }}</td>
+          <td>{{ ticket.car.carColor }}</td>
+          <td>{{ ticket.parkedAt | date:'MM/dd/yyyy hh:mm a' }}</td>
+          <td><button ng-click="removeTicket(ticket.id)">Remove</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
